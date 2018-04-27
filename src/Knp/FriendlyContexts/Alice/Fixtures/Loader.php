@@ -3,9 +3,9 @@
 namespace Knp\FriendlyContexts\Alice\Fixtures;
 
 use Knp\FriendlyContexts\Alice\ProviderResolver;
-use Nelmio\Alice\Fixtures\Loader as BaseLoader;
+use Nelmio\Alice\Loader\NativeLoader;
 
-class Loader extends BaseLoader
+class Loader extends NativeLoader
 {
     private $cache = [];
 
@@ -22,6 +22,12 @@ class Loader extends BaseLoader
     public function clearCache()
     {
         $this->cache = [];
+    }
+
+    // BC compatibility
+    public function load($file)
+    {
+        return $this->loadFile($file);
     }
 
     /**
